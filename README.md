@@ -4,7 +4,7 @@
 
 **Portugal's and the EU's public data, ready for your AI agent.**
 
-Two skills for Claude, Claude Code and other agents that read `SKILL.md`: a curated catalog of Portuguese and EU open-data APIs, and a checklist that stops the agent from publishing a misleading number.
+Three skills for Claude, Claude Code and other agents that read `SKILL.md`: a curated catalog of Portuguese and EU open-data APIs, a checklist that stops the agent from publishing a misleading number, and a guide to Portuguese municipal council meetings.
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-2fa36b)](LICENSE)
 [![Verified](https://img.shields.io/badge/verified-2026--11--02-2fa36b)](skills/apis-publicas-pt/SKILL.md)
@@ -18,14 +18,15 @@ Two skills for Claude, Claude Code and other agents that read `SKILL.md`: a cura
 
 ---
 
-## The two skills
+## The three skills
 
 | Skill | What it does |
 |---|---|
 | [`apis-publicas-pt`](skills/apis-publicas-pt/SKILL.md) | Catalog of 13 sources (plus the OParl data standard) — national statistics, weather, central banks, public procurement, parliament and local councils — each with endpoint, auth, licence, limits, pitfalls and a working example. |
 | [`verificar-dados-publicos`](skills/verificar-dados-publicos/SKILL.md) | Eight checks to run before publishing a number from public data: reference years, units, what it really measures, gaps, outliers, duplicated entities, fair comparison and licence. |
+| [`reunioes-municipais-pt`](skills/reunioes-municipais-pt/SKILL.md) | Council meetings (Câmara and Assembleia Municipal): OpenCouncil's public MCP where it exists, official minutes and videos elsewhere, a transcription pipeline, Portuguese privacy rules (CNPD) and the OParl data model. |
 
-They work alone, but are made to be used together: the catalog finds and calls the data, the checklist makes sure the answer is honest about it.
+They work alone, but are made to be used together: the catalog finds and calls the data, the checklist makes sure the answer is honest about it, and the meetings guide covers what councils discuss and decide.
 
 ## Why
 
@@ -69,7 +70,7 @@ And a link is not enough. Before building anything you need to know whether the 
 ## Install
 
 ### claude.ai (web, desktop, mobile)
-1. Download the zips from [`dist/`](dist/): [`apis-publicas-pt.zip`](dist/apis-publicas-pt.zip) and [`verificar-dados-publicos.zip`](dist/verificar-dados-publicos.zip).
+1. Download the zips from [`dist/`](dist/): [`apis-publicas-pt.zip`](dist/apis-publicas-pt.zip), [`verificar-dados-publicos.zip`](dist/verificar-dados-publicos.zip) and [`reunioes-municipais-pt.zip`](dist/reunioes-municipais-pt.zip).
 2. Upload them in the skills section of your claude.ai settings.
 3. If your plan restricts network access, allow the domains you need (see [Network](#network)).
 
@@ -93,7 +94,8 @@ Once installed, the skills kick in on their own when a request involves Portugue
 - "What was Coimbra's resident population in 2023? Cite the source."
 - "How much did Arouca's council spend in 2023, and how much of it came from its own revenue?"
 - "Compare public contracts per resident in Arouca and Coimbra in 2025."
-- "What did Cascais council discuss about housing this year?"
+- "What did Cascais council discuss about housing this year? Quote the councillors."
+- "Where can I find the minutes and videos of Matosinhos municipal assembly?"
 - "Can I use IPMA weather data in a paid app?"
 
 ## Network
@@ -136,6 +138,7 @@ After editing a `SKILL.md`, rebuild the claude.ai zips with `./scripts/build-zip
 ```
 skills/apis-publicas-pt/SKILL.md          the catalog
 skills/verificar-dados-publicos/SKILL.md  the checklist
+skills/reunioes-municipais-pt/SKILL.md    the council meetings guide
 dist/*.zip                                the same skills, ready to upload to claude.ai
 scripts/check-endpoints.sh                checks every source still answers
 scripts/build-zip.sh                      builds the zips

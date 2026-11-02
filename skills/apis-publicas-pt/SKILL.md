@@ -3,7 +3,7 @@ name: apis-publicas-pt
 description: Curated catalog of Portuguese and EU public-data APIs (dados.gov.pt, INE, IPMA, Banco de Portugal, Eurostat, ECB, TED, Parliament, local councils) with endpoint, auth, licence, limits and a working example. Use when choosing, calling or citing open data about Portugal or the EU. Catálogo de APIs públicas de Portugal e da UE (dados abertos, câmaras municipais, estatística, meteorologia, contratos públicos).
 license: MIT
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   verified: "2026-11-02"
 ---
 
@@ -108,9 +108,10 @@ If the environment uses an allowlist, these are the domains this catalog needs (
 ## Local government and parliament
 
 ### OpenCouncil Portugal — council meetings, transcribed (Schema Labs)
-- **What:** transcripts of Câmara and Assembleia Municipal meetings, split into subjects with speakers, summaries and map locations. Greek non-profit project (open source, AGPL-3.0); in Portugal, **live for Cascais** (meetings up to October 2026 as of the last check).
-- **Endpoints:** site `https://pt.opencouncil.eu`; public **MCP server** `https://pt.opencouncil.eu/mcp` (personal MCP addresses need an account); API docs at `https://pt.opencouncil.eu/en/docs` (contents not verified).
-- **Auth:** none for the public MCP address.
+- **What:** transcripts of Câmara and Assembleia Municipal meetings, split into subjects with speakers, summaries and map locations. Greek non-profit project (open source, AGPL-3.0); in Portugal, **only Cascais so far** — 2 released meetings (20/10/2026 and 28/09/2026), not an official partnership with the municipality (verified 2026-11-02).
+- **Endpoints:** site `https://pt.opencouncil.eu`; public **MCP server** `https://pt.opencouncil.eu/mcp` (Streamable HTTP; tools such as `list_cities`, `list_meetings`, `get_meeting`, `get_subject_transcript`, `search`, `list_nearby_subjects`); API docs at `https://pt.opencouncil.eu/en/docs` (contents not verified).
+- **Auth:** none for the read-only MCP tools; unreleased cities and highlight tools need a personal token.
+- **How to use it:** see the `reunioes-municipais-pt` skill if installed.
 - **Licence/terms:** terms allow free use and redistribution of the information; source videos stay public domain; logo and design are protected. Transcripts are AI-generated and **not official minutes** — always say so when quoting.
 - **Limits:** not published.
 - **Good for:** what a council discussed about a subject or place, who spoke, and quoting with a timestamp. For other municipalities, use the council's own minutes (PDF) and videos.

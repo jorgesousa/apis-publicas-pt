@@ -4,7 +4,7 @@
 
 **Os dados públicos de Portugal e da UE, prontos para o teu agente de IA.**
 
-Duas skills para Claude, Claude Code e outros agentes que leem `SKILL.md`: um catálogo curado de APIs de dados abertos de Portugal e da UE, e uma lista de verificações que impede o agente de publicar um número enganador.
+Três skills para Claude, Claude Code e outros agentes que leem `SKILL.md`: um catálogo curado de APIs de dados abertos de Portugal e da UE, uma lista de verificações que impede o agente de publicar um número enganador, e um guia para as reuniões das câmaras e assembleias municipais.
 
 [![Licença: MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-2fa36b)](LICENSE)
 [![Verificado em](https://img.shields.io/badge/verificado-2026--11--02-2fa36b)](skills/apis-publicas-pt/SKILL.md)
@@ -18,14 +18,15 @@ Duas skills para Claude, Claude Code e outros agentes que leem `SKILL.md`: um ca
 
 ---
 
-## As duas skills
+## As três skills
 
 | Skill | O que faz |
 |---|---|
 | [`apis-publicas-pt`](skills/apis-publicas-pt/SKILL.md) | Catálogo de 13 fontes (mais a norma OParl) — estatística oficial, meteorologia, bancos centrais, contratação pública, parlamento e câmaras municipais — cada uma com endpoint, autenticação, licença, limites, armadilhas e um exemplo que funciona. |
 | [`verificar-dados-publicos`](skills/verificar-dados-publicos/SKILL.md) | Oito verificações antes de publicar um número com dados públicos: anos de referência, unidades, o que o número mede, lacunas, valores extremos, entidades duplicadas, comparação justa e licença. |
+| [`reunioes-municipais-pt`](skills/reunioes-municipais-pt/SKILL.md) | Reuniões de câmara e assembleia municipal: o MCP público do OpenCouncil onde existe, atas e vídeos oficiais nos outros municípios, um pipeline de transcrição, as regras de privacidade da CNPD e o modelo de dados OParl. |
 
-Funcionam sozinhas, mas foram feitas para andar juntas: o catálogo encontra e chama os dados, a verificação garante que a resposta é honesta sobre eles.
+Funcionam sozinhas, mas foram feitas para andar juntas: o catálogo encontra e chama os dados, a verificação garante que a resposta é honesta sobre eles, e o guia das reuniões cobre o que as câmaras discutem e decidem.
 
 As skills estão escritas em inglês para chegarem a mais gente, mas mantêm os nomes oficiais portugueses e reagem a pedidos em português. O agente responde na tua língua.
 
@@ -71,7 +72,7 @@ E um link não chega. Antes de construir alguma coisa precisas de saber se a API
 ## Instalar
 
 ### claude.ai (web, desktop, telemóvel)
-1. Descarrega os zips de [`dist/`](dist/): [`apis-publicas-pt.zip`](dist/apis-publicas-pt.zip) e [`verificar-dados-publicos.zip`](dist/verificar-dados-publicos.zip).
+1. Descarrega os zips de [`dist/`](dist/): [`apis-publicas-pt.zip`](dist/apis-publicas-pt.zip), [`verificar-dados-publicos.zip`](dist/verificar-dados-publicos.zip) e [`reunioes-municipais-pt.zip`](dist/reunioes-municipais-pt.zip).
 2. Carrega-os na secção de skills das definições do claude.ai.
 3. Se o teu plano limitar o acesso à rede, permite os domínios de que precisas (ver [Rede](#rede)).
 
@@ -95,7 +96,8 @@ Depois de instaladas, as skills entram sozinhas quando o pedido envolve dados p�
 - "Qual era a população residente em Coimbra em 2023? Cita a fonte."
 - "Quanto gastou a Câmara de Arouca em 2023 e quanto veio de receitas próprias?"
 - "Compara os contratos públicos por habitante de Arouca e Coimbra em 2025."
-- "O que discutiu a Câmara de Cascais sobre habitação este ano?"
+- "O que discutiu a Câmara de Cascais sobre habitação este ano? Cita os vereadores."
+- "Onde encontro as atas e os vídeos da Assembleia Municipal de Matosinhos?"
 - "Posso usar os dados do IPMA numa app paga?"
 
 ## Rede
