@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
-# Gera dist/apis-publicas-pt.zip para carregar no claude.ai (a pasta da skill fica na raiz do zip).
+# Builds dist/<skill>.zip for every skill, ready to upload to claude.ai
+# (the skill folder sits at the root of each zip).
 set -euo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p dist
-rm -f dist/apis-publicas-pt.zip
-(cd skills && zip -rq ../dist/apis-publicas-pt.zip apis-publicas-pt -x '*.DS_Store')
-echo "dist/apis-publicas-pt.zip criado"
+for dir in skills/*/; do
+  name=$(basename "$dir")
+  rm -f "dist/$name.zip"
+  (cd skills && zip -rq "../dist/$name.zip" "$name" -x '*.DS_Store')
+  echo "dist/$name.zip"
+done

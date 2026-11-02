@@ -2,147 +2,150 @@
 
 # apis-publicas-pt
 
-**As APIs públicas de Portugal e da União Europeia, prontas para o teu agente.**
+**Portugal's and the EU's public data, ready for your AI agent.**
 
-Uma skill para Claude e Claude Code com um catálogo curado de fontes de dados abertos: dados.gov.pt, INE, IPMA, Banco de Portugal, Eurostat, BCE, TED e mais. Cada fonte vem com endpoint, autenticação, licença, limites e um exemplo pronto a correr.
+Two skills for Claude, Claude Code and other agents that read `SKILL.md`: a curated catalog of Portuguese and EU open-data APIs, and a checklist that stops the agent from publishing a misleading number.
 
-[![Licença: MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-2fa36b)](LICENSE)
-[![Verificado em](https://img.shields.io/badge/verificado-2026--11--02-2fa36b)](skills/apis-publicas-pt/SKILL.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-2fa36b)](LICENSE)
+[![Verified](https://img.shields.io/badge/verified-2026--11--02-2fa36b)](skills/apis-publicas-pt/SKILL.md)
 [![Endpoints](https://github.com/jorgesousa/apis-publicas-pt/actions/workflows/check-endpoints.yml/badge.svg)](https://github.com/jorgesousa/apis-publicas-pt/actions/workflows/check-endpoints.yml)
 
-<img src="docs/demo.gif" alt="Demonstração: o agente responde a 'Quanto gasta Arouca por habitante em contratos públicos? Compara com Coimbra.' escolhendo o dados.gov.pt e o INE, fazendo as chamadas reais, verificando anos e licenças e mostrando o resultado com fontes" width="860">
+<img src="docs/demo.gif" alt="Demo: asked how much Arouca spends per resident on public contracts compared with Coimbra, the agent picks dados.gov.pt and INE, makes the real calls, checks reference years and licences, and answers with sources" width="860">
 
-[English summary below](#english)
+**[Leia em português](README.pt.md)**
 
 </div>
 
 ---
 
-## Porquê
+## The two skills
 
-O catálogo de APIs mais conhecido do GitHub, [public-apis](https://github.com/public-apis/public-apis), tem mais de 2 000 entradas. Para Portugal quase nada:
+| Skill | What it does |
+|---|---|
+| [`apis-publicas-pt`](skills/apis-publicas-pt/SKILL.md) | Catalog of 13 sources (plus the OParl data standard) — national statistics, weather, central banks, public procurement, parliament and local councils — each with endpoint, auth, licence, limits, pitfalls and a working example. |
+| [`verificar-dados-publicos`](skills/verificar-dados-publicos/SKILL.md) | Eight checks to run before publishing a number from public data: reference years, units, what it really measures, gaps, outliers, duplicated entities, fair comparison and licence. |
 
-| Fonte | public-apis | apis-publicas-pt |
+They work alone, but are made to be used together: the catalog finds and calls the data, the checklist makes sure the answer is honest about it.
+
+## Why
+
+The best-known API list on GitHub, [public-apis](https://github.com/public-apis/public-apis), has 2,000+ entries. For Portugal it has almost nothing:
+
+| Source | public-apis | apis-publicas-pt |
 |---|:---:|:---:|
 | dados.gov.pt | ✅ | ✅ |
-| IPMA | ✅ | ✅ |
-| INE | ❌ | ✅ |
+| IPMA (weather) | ✅ | ✅ |
+| INE (Statistics Portugal), incl. municipal budgets | ❌ | ✅ |
 | Banco de Portugal (BPstat) | ❌ | ✅ |
+| Assembleia da República (parliament) | ❌ | ✅ |
+| OpenCouncil Portugal (council meetings) | ❌ | ✅ |
 | Eurostat | ❌ | ✅ |
-| Banco Central Europeu | ❌ | ✅ |
-| TED (contratos públicos da UE) | ❌ | ✅ |
+| European Central Bank | ❌ | ✅ |
+| TED (EU public procurement) | ❌ | ✅ |
 
-E um link não chega. Antes de construir alguma coisa precisas de saber se a API pede chave, se podes usar os dados num produto comercial e onde estão as armadilhas. É isso que esta skill dá ao teu agente.
+And a link is not enough. Before building anything you need to know whether the API needs a key, whether you can use the data in a commercial product, and where the traps are — like INE's municipal finance figures being in **thousands** of euros, or Eurostat returning an empty "latest" year. That is what these skills give your agent.
 
-## O que está no catálogo
+## What's in the catalog
 
-| Fonte | O que tens lá | Chave | Licença | Estado |
+| Source | What you get | Key | Licence | Status |
 |---|---|:---:|---|---|
-| [dados.gov.pt](https://dados.gov.pt) | Portal nacional de dados abertos (contratos BASE, câmaras, organismos) | não | por dataset | ✅ verificada |
-| [INE](https://www.ine.pt) | Estatística oficial: população, demografia, economia por município | não | citar a fonte | ✅ verificada |
-| [IPMA](https://api.ipma.pt) | Previsão, avisos, sismos, risco de incêndio | não | ⚠ sem fins lucrativos | ✅ verificada |
-| [Banco de Portugal](https://bpstat.bportugal.pt) | BPstat: séries económicas e financeiras | não | reutilização livre (SEBC) | ✅ verificada |
-| [GeoAPI.pt](https://geoapi.pt) | Municípios, freguesias, códigos postais (projeto não oficial) | não | não indicada | 📄 documentação |
-| [Eurostat](https://ec.europa.eu/eurostat) | Estatística europeia (JSON-stat, SDMX) | não | livre, incl. comercial | ✅ verificada |
-| [BCE](https://data.ecb.europa.eu) | Câmbios, taxas de juro, agregados monetários | não | livre, incl. comercial | 📄 documentação |
-| [TED](https://ted.europa.eu) | Contratos públicos acima dos limiares europeus | não | por confirmar | 📄 documentação |
-| [Open-Meteo](https://open-meteo.com) | Meteorologia global | não | ⚠ não comercial | 📄 documentação |
-| Transparência SNS · Parlamento · data.europa.eu | — | — | — | 🔍 por verificar |
+| [dados.gov.pt](https://dados.gov.pt) | National open-data portal (Portal BASE contracts, councils, agencies) | no | per dataset | ✅ |
+| [INE](https://www.ine.pt) | Official statistics: population, municipal revenue and expenditure | no | CC BY | ✅ |
+| [IPMA](https://api.ipma.pt) | Forecasts, warnings, earthquakes, fire risk | no | ⚠ non-profit only | ✅ |
+| [Banco de Portugal](https://bpstat.bportugal.pt) | BPstat economic and financial series | no | free reuse (ESCB) | ✅ |
+| [GeoAPI.pt](https://geoapi.pt) | Municipalities, parishes, postcodes (unofficial) | no | not stated | ✅ |
+| [Assembleia da República](https://www.parlamento.pt/Cidadania/Paginas/DadosAbertos.aspx) | Initiatives, votes, debates, MPs (XML/JSON files) | no | attribution required | ✅ |
+| [OpenCouncil Portugal](https://pt.opencouncil.eu) | Transcribed council meetings, with a public MCP server (Cascais so far) | no | free reuse | ✅ |
+| [Eurostat](https://ec.europa.eu/eurostat) | EU statistics (JSON-stat, SDMX) | no | free, incl. commercial | ✅ |
+| [ECB](https://data.ecb.europa.eu) | Exchange rates, interest rates, monetary data | no | free, incl. commercial | ✅ |
+| [TED](https://ted.europa.eu) | EU public procurement above thresholds | no | to confirm | ✅ |
+| [data.europa.eu](https://data.europa.eu) | European data portal | no | per dataset | 🔍 |
+| [Open-Meteo](https://open-meteo.com) | Global weather | no | ⚠ non-commercial | ✅ |
+| OParl | Data model for council information (reference standard) | — | — | 📐 |
+| Transparência SNS | Health service data | — | — | 🔍 |
 
-**Legenda:** ✅ endpoint chamado com sucesso · 📄 confirmado na documentação oficial · 🔍 ainda por testar.
+✅ endpoint answered in the [weekly check](.github/workflows/check-endpoints.yml) · 🔍 responds, but query details still to verify · 📐 a standard, not a data source.
 
-## Instalar
+## Install
 
-### claude.ai (web, desktop, telemóvel)
-1. Descarrega [`dist/apis-publicas-pt.zip`](dist/apis-publicas-pt.zip).
-2. Nas definições do claude.ai, na secção de skills, carrega o zip.
-3. Se o teu plano tiver controlo de acesso à rede, permite os domínios de que precisas (ver [Rede](#rede)).
+### claude.ai (web, desktop, mobile)
+1. Download the zips from [`dist/`](dist/): [`apis-publicas-pt.zip`](dist/apis-publicas-pt.zip) and [`verificar-dados-publicos.zip`](dist/verificar-dados-publicos.zip).
+2. Upload them in the skills section of your claude.ai settings.
+3. If your plan restricts network access, allow the domains you need (see [Network](#network)).
 
 ### Claude Code
 ```bash
 git clone https://github.com/jorgesousa/apis-publicas-pt.git
 mkdir -p ~/.claude/skills
-cp -r apis-publicas-pt/skills/apis-publicas-pt ~/.claude/skills/
+cp -r apis-publicas-pt/skills/* ~/.claude/skills/
 ```
-Para um só projeto, copia a pasta para `.claude/skills/` dentro do projeto.
+For a single project, copy the folders into that project's `.claude/skills/` instead.
 
-### Com a CLI `skills` (Claude Code, Cursor, Codex e outros agentes)
+### With the `skills` CLI (Claude Code, Cursor, Codex and other agents)
 ```bash
 npx skills add jorgesousa/apis-publicas-pt
 ```
 
-## Experimenta
+## Try it
 
-Depois de instalada, a skill entra sozinha quando o pedido envolve dados públicos portugueses ou europeus:
+Once installed, the skills kick in on their own when a request involves Portuguese or EU public data. Ask in English or Portuguese:
 
-- "Qual era a população residente em Coimbra em 2023? Cita a fonte."
-- "Vai chover amanhã no Porto?"
-- "Que datasets de contratos públicos existem no dados.gov.pt? Quais têm licença aberta?"
-- "Compara o câmbio euro-dólar deste ano com o do ano passado."
-- "Posso usar os dados do IPMA numa app paga?"
+- "What was Coimbra's resident population in 2023? Cite the source."
+- "How much did Arouca's council spend in 2023, and how much of it came from its own revenue?"
+- "Compare public contracts per resident in Arouca and Coimbra in 2025."
+- "What did Cascais council discuss about housing this year?"
+- "Can I use IPMA weather data in a paid app?"
 
-## Rede
+## Network
 
-A skill não faz pedidos sozinha: diz ao agente onde e como pedir. Se o teu ambiente só deixar sair para domínios autorizados, estes são os que o catálogo usa:
+The skills make no requests themselves: they tell the agent where and how to ask. If your environment only allows approved domains, the catalog uses:
 
-`dados.gov.pt` · `www.ine.pt` · `api.ipma.pt` · `bpstat.bportugal.pt` · `json.geoapi.pt` · `ec.europa.eu` · `data-api.ecb.europa.eu` · `api.ted.europa.eu` · `data.europa.eu` · `api.open-meteo.com`
+`dados.gov.pt` · `www.ine.pt` · `api.ipma.pt` · `bpstat.bportugal.pt` · `json.geoapi.pt` · `www.parlamento.pt` · `app.parlamento.pt` · `pt.opencouncil.eu` · `ec.europa.eu` · `data-api.ecb.europa.eu` · `api.ted.europa.eu` · `data.europa.eu` · `api.open-meteo.com`
 
-Se um domínio estiver bloqueado, a skill manda o agente parar e dizer-te qual é, em vez de tentar contornar o bloqueio.
+If a domain is blocked, the skill tells the agent to stop and name it, instead of trying to get around the block.
 
-## Segurança e princípios
+## Safety and principles
 
-- **Só texto.** A skill é um único `SKILL.md`. Não instala nada, não corre scripts, não tem dependências.
-- **Zero chaves.** Todas as fontes leem-se sem registo. O agente é instruído a nunca pôr credenciais em URLs ou ficheiros.
-- **Licença sempre à vista.** O agente cita a fonte e a data, e avisa quando uma licença proíbe uso comercial.
-- **Honesto sobre o que não sabe.** O que não foi testado está marcado "por verificar" e não deve ir para produção.
+- **Text only.** Each skill is a single `SKILL.md`. Nothing to install, no scripts, no dependencies.
+- **No keys.** Every source is readable without registering. The agent is told never to put credentials in URLs or files.
+- **Licences up front.** The agent cites source and date, and warns when a licence forbids commercial use.
+- **Honest about gaps.** Anything untested is marked "to verify" and should not reach production.
 
-## Manter o catálogo atual
+## Keeping it current
 
-As APIs públicas mudam. Por isso:
+Public APIs change, so:
 
-- **Verificação semanal:** um [workflow do GitHub Actions](.github/workflows/check-endpoints.yml) chama todos os endpoints às segundas-feiras e publica o resultado. Também podes correr `./scripts/check-endpoints.sh` localmente.
-- **Data de verificação:** cada versão diz quando foi verificada. Entradas com mais de 6 meses são reverificadas antes de se confiar nelas.
+- **Weekly check:** a [GitHub Actions workflow](.github/workflows/check-endpoints.yml) calls every endpoint on Mondays and publishes the result. Run `./scripts/check-endpoints.sh` to check locally.
+- **Verification date:** each version says when it was verified. Entries older than six months get re-checked before anyone relies on them.
 
-## Contribuir
+## Contributing
 
-Falta uma fonte? Abre um issue ou um pull request. Uma API só entra com:
+Missing a source? Open an issue or a pull request. A source joins the catalog only with:
 
-1. endpoint testado (ou marcado "por verificar");
-2. autenticação;
-3. licença, com link para os termos;
-4. limites (ou "não publicados");
-5. um exemplo de chamada;
-6. a data da verificação.
+1. a tested endpoint (or marked "to verify");
+2. auth;
+3. licence, with a link to the terms;
+4. limits (or "not published");
+5. an example call;
+6. the verification date.
 
-Depois de editar o `SKILL.md`, gera o zip para o claude.ai com `./scripts/build-zip.sh`.
+After editing a `SKILL.md`, rebuild the claude.ai zips with `./scripts/build-zip.sh`.
 
-## Estrutura
+## Layout
 
 ```
-skills/apis-publicas-pt/SKILL.md   a skill (o único ficheiro que o agente lê)
-dist/apis-publicas-pt.zip          a mesma skill, pronta a carregar no claude.ai
-scripts/check-endpoints.sh         verifica se as fontes respondem
-scripts/build-zip.sh               gera o zip
-.github/workflows/                 verificação semanal
-docs/                              GIF e imagem do README
+skills/apis-publicas-pt/SKILL.md          the catalog
+skills/verificar-dados-publicos/SKILL.md  the checklist
+dist/*.zip                                the same skills, ready to upload to claude.ai
+scripts/check-endpoints.sh                checks every source still answers
+scripts/build-zip.sh                      builds the zips
+.github/workflows/                        weekly check
+docs/                                     README images
+README.pt.md                              Portuguese README
 ```
 
----
-
-<a id="english"></a>
-## English
-
-**apis-publicas-pt** is a Claude skill (also works with Claude Code and other agents that support `SKILL.md`) with a curated catalog of Portuguese and EU open-data APIs: dados.gov.pt, INE (Statistics Portugal), IPMA (weather), Banco de Portugal, Eurostat, the European Central Bank, TED and more.
-
-The popular [public-apis](https://github.com/public-apis/public-apis) list has 2,000+ entries but no INE, Banco de Portugal or ECB. This skill fills that gap and goes further than a link: for every source the agent gets the endpoint, whether a key is needed (none are), the licence (and whether commercial use is allowed), known limits and pitfalls, and a ready-to-run example.
-
-- **Install:** upload `dist/apis-publicas-pt.zip` in your claude.ai skill settings, copy `skills/apis-publicas-pt` to `~/.claude/skills/`, or run `npx skills add jorgesousa/apis-publicas-pt`.
-- **Safe by design:** a single markdown file. No scripts, no dependencies, no credentials.
-- **Kept fresh:** a weekly GitHub Action checks every endpoint.
-- The skill is written in Portuguese; agents read it fine and answer in your language.
-
-## Licença
+## License
 
 [MIT](LICENSE) © 2026 Jorge Sousa · [Tosco Labs](https://github.com/jorgesousa)
 
-Este projeto não tem ligação a nenhuma das entidades listadas. Os dados pertencem a cada fonte e seguem os termos de cada uma.
+Not affiliated with any of the sources listed. The data belongs to each source and follows its own terms.
