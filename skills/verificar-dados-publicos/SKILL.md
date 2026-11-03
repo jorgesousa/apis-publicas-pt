@@ -3,7 +3,7 @@ name: verificar-dados-publicos
 description: Checklist to run before publishing any number, chart or comparison built from public data (official statistics, public contracts, budgets, council records). Catches mismatched years, wrong units, contracts mistaken for spending, small samples, duplicated entities and licence problems. Use whenever an answer or product cites open data. Verificação de dados públicos antes de responder ou publicar.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   verified: "2026-11-02"
 ---
 
@@ -15,7 +15,7 @@ Every rule below comes from a real case. The examples use Portuguese data, but t
 
 ## How to use it
 
-1. Write down the claim in one sentence ("Arouca spends €843 per resident on public contracts").
+1. Write down the claim in one sentence ("Arouca spends €845 per resident on public contracts").
 2. Go through the eight checks. For each one, either confirm it or add a caveat.
 3. End the output with: sources, reference period(s), extraction date, method in one line, and the caveats.
 
