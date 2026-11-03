@@ -92,8 +92,8 @@ npx skills add jorgesousa/apis-publicas-pt
 Once installed, the skills kick in on their own when a request involves Portuguese or EU public data. Ask in English or Portuguese:
 
 - "What was Coimbra's resident population in 2023? Cite the source."
-- "How much did Arouca's council spend in 2023, and how much of it came from its own revenue?"
-- "Compare public contracts per resident in Arouca and Coimbra in 2025."
+- "Which public procurement datasets are on dados.gov.pt, and what licence does each one have?"
+- "Is there a weather warning for Coimbra today?"
 - "What did Cascais council discuss about housing this year? Quote the councillors."
 - "Where can I find the minutes and videos of Matosinhos municipal assembly?"
 - "Can I use IPMA weather data in a paid app?"

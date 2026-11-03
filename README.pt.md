@@ -94,8 +94,8 @@ npx skills add jorgesousa/apis-publicas-pt
 Depois de instaladas, as skills entram sozinhas quando o pedido envolve dados públicos portugueses ou europeus:
 
 - "Qual era a população residente em Coimbra em 2023? Cita a fonte."
-- "Quanto gastou a Câmara de Arouca em 2023 e quanto veio de receitas próprias?"
-- "Compara os contratos públicos por habitante de Arouca e Coimbra em 2025."
+- "Que conjuntos de dados de contratação pública existem no dados.gov.pt, e com que licença?"
+- "Há algum aviso meteorológico para Coimbra hoje?"
 - "O que discutiu a Câmara de Cascais sobre habitação este ano? Cita os vereadores."
 - "Onde encontro as atas e os vídeos da Assembleia Municipal de Matosinhos?"
 - "Posso usar os dados do IPMA numa app paga?"
