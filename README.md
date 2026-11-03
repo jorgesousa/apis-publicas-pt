@@ -10,7 +10,7 @@ Three skills for Claude, Claude Code and other agents that read `SKILL.md`: a cu
 [![Verified](https://img.shields.io/badge/verified-2026--11--02-2fa36b)](skills/apis-publicas-pt/SKILL.md)
 [![Endpoints](https://github.com/jorgesousa/apis-publicas-pt/actions/workflows/check-endpoints.yml/badge.svg)](https://github.com/jorgesousa/apis-publicas-pt/actions/workflows/check-endpoints.yml)
 
-<img src="docs/demo.gif" alt="Demo: an AI agent is asked where to find the videos and minutes of Matosinhos council meetings, and points to the official sources with a privacy note" width="860">
+<img src="docs/demo.gif" alt="Demo of the three skills: finding the INE source for municipal population, checking a draft chart before publishing, and finding the videos and minutes of Matosinhos council meetings" width="860">
 
 **[Leia em português](README.pt.md)**
 

@@ -10,7 +10,7 @@ Três skills para Claude, Claude Code e outros agentes que leem `SKILL.md`: um c
 [![Verificado em](https://img.shields.io/badge/verificado-2026--11--02-2fa36b)](skills/apis-publicas-pt/SKILL.md)
 [![Endpoints](https://github.com/jorgesousa/apis-publicas-pt/actions/workflows/check-endpoints.yml/badge.svg)](https://github.com/jorgesousa/apis-publicas-pt/actions/workflows/check-endpoints.yml)
 
-<img src="docs/demo.gif" alt="Demonstração: perguntam a um agente de IA onde estão os vídeos e as atas das reuniões da Câmara de Matosinhos, e ele indica as fontes oficiais com uma nota de privacidade" width="860">
+<img src="docs/demo.gif" alt="Demonstração das três skills: encontrar a fonte do INE para a população por município, verificar um gráfico antes de o publicar, e encontrar os vídeos e as atas das reuniões de Matosinhos" width="860">
 
 **[Read in English](README.md)**
 
