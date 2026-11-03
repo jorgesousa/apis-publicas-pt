@@ -126,6 +126,6 @@ Falta uma fonte? Abre um issue ou um pull request. Uma fonte só entra com: endp
 
 ## Licença
 
-[MIT](LICENSE) © 2026 Jorge Sousa · [Tosco Labs](https://github.com/jorgesousa)
+[MIT](LICENSE) © 2026 [Jorge Sousa](https://github.com/jorgesousa)
 
 Este projeto não tem ligação a nenhuma das fontes listadas. Os dados pertencem a cada fonte e seguem os termos de cada uma.

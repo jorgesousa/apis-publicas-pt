@@ -149,6 +149,6 @@ README.pt.md                              Portuguese README
 
 ## License
 
-[MIT](LICENSE) © 2026 Jorge Sousa · [Tosco Labs](https://github.com/jorgesousa)
+[MIT](LICENSE) © 2026 [Jorge Sousa](https://github.com/jorgesousa)
 
 Not affiliated with any of the sources listed. The data belongs to each source and follows its own terms.
