@@ -3,7 +3,7 @@ name: verificar-dados-publicos
 description: Checklist to run before publishing any number, chart or comparison built from public data (official statistics, public contracts, budgets, council records). Catches mismatched years, wrong units, contracts mistaken for spending, small samples, duplicated entities and licence problems. Use whenever an answer or product cites open data. Verificação de dados públicos antes de responder ou publicar.
 license: MIT
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
   verified: "2026-11-02"
 ---
 
@@ -15,7 +15,7 @@ Every rule below comes from a real case. The examples use Portuguese data, but t
 
 ## How to use it
 
-1. Write down the claim in one sentence ("Arouca spends €845 per resident on public contracts").
+1. Write down the claim in one sentence ("Municipality X spends €N per resident on public contracts").
 2. Go through the eight checks. For each one, either confirm it or add a caveat.
 3. End the output with: sources, reference period(s), extraction date, method in one line, and the caveats.
 
@@ -46,7 +46,7 @@ Every rule below comes from a real case. The examples use Portuguese data, but t
 - If a dataset is abandoned (e.g. the BASE OCDS feed, frozen since 2020; the `api.openar.pt` API, archived in 2026), do not mix it with live data.
 
 ### 5. Small numbers and outliers
-- One large item can dominate a total: in Arouca one project (Parque da Saúde) was 35% of 2025 contracts. Say so whenever one item is more than ~20% of the total.
+- One large item can dominate a total: in a small municipality, a single construction project can be a third of a year's contracts. Say so whenever one item is more than ~20% of the total.
 - Small populations make per-capita figures jumpy. Rank small and large places together only with a caveat, or group by size.
 - Show uncertainty or the sample size where it exists (e.g. "observed vs expected" school indicators with few pupils).
 
@@ -74,7 +74,7 @@ End every data answer or page with a block like this:
 Sources: Portal BASE/IMPIC via dados.gov.pt (contracts 2025, public domain) · INE, resident population 2023 (indicator 0008273, CC BY)
 Extracted: 2026-11-02
 Method: value of 2025 contracts ÷ 2023 resident population
-Caveats: different reference years; contracts ≠ total spending; one project = 35% of Arouca's total
+Caveats: different reference years; contracts ≠ total spending; one project = over a third of the total
 ```
 
 ## Quick pass (when time is short)
