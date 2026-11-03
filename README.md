@@ -10,7 +10,7 @@ Three skills for Claude, Claude Code and other agents that read `SKILL.md`: a cu
 [![Verified](https://img.shields.io/badge/verified-2026--11--02-2fa36b)](skills/apis-publicas-pt/SKILL.md)
 [![Endpoints](https://github.com/jorgesousa/apis-publicas-pt/actions/workflows/check-endpoints.yml/badge.svg)](https://github.com/jorgesousa/apis-publicas-pt/actions/workflows/check-endpoints.yml)
 
-<img src="docs/demo.gif" alt="Demo: asked how much Arouca spends per resident on public contracts compared with Coimbra, the agent picks dados.gov.pt and INE, makes the real calls, checks reference years and licences, and answers with sources" width="860">
+<img src="docs/demo.gif" alt="Demo: an AI agent is asked where to find the videos and minutes of Matosinhos council meetings, and points to the official sources with a privacy note" width="860">
 
 **[Leia em português](README.pt.md)**
 
