@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
-# Verifica se os endpoints do catálogo respondem.
+# Verifica se os endpoints das skills portugal-open-data respondem.
 # Uso: ./scripts/check-endpoints.sh            (tabela no terminal)
 #      ./scripts/check-endpoints.sh --markdown (tabela Markdown, para o resumo do GitHub Actions)
 # Só faz pedidos GET/POST de leitura, sem credenciais. Sai com código 1 se alguma fonte falhar.
+# Fontes com método terminado em "?" (ex.: "GET?") são instáveis: uma falha dá AVISO e não faz falhar a verificação.
 
 set -u
 MARKDOWN=0
 [ "${1:-}" = "--markdown" ] && MARKDOWN=1
 
-UA="apis-publicas-pt-healthcheck (+https://github.com/jorgesousa/apis-publicas-pt)"
+UA="portugal-open-data-healthcheck (+https://github.com/jorgesousa/portugal-open-data)"
 
 # nome|método|url
 CHECKS=(
@@ -25,6 +26,14 @@ CHECKS=(
   "TED|POST|https://api.ted.europa.eu/v3/notices/search"
   "data.europa.eu|GET|https://data.europa.eu/api/hub/search/search?q=portugal&limit=1"
   "Open-Meteo|GET|https://api.open-meteo.com/v1/forecast?latitude=40.2&longitude=-8.4&current=temperature_2m"
+  "Portal BASE (dados.gov.pt)|GET|https://dados.gov.pt/api/1/datasets/contratos-publicos-portal-base-impic-contratos-de-2012-a-2026/"
+  "CAOP (DGT OGC API)|GET|https://ogcapi.dgterritorio.gov.pt/"
+  "InfoEscolas|GET|https://infoescolas.medu.pt/bds.asp"
+  "InfoEscolas (ficheiro)|GET|https://infoescolas.medu.pt/docs/2024/InfoEscolas2024_Secundario_CH_DadosPorEscola.xlsx"
+  "Arquivo.pt|GET|https://arquivo.pt/textsearch?q=coimbra&maxItems=1&prettyPrint=false"
+  "GTFS SMTUC (dados.gov.pt)|GET|https://dados.gov.pt/api/1/datasets/gtfs-estaticos-servicos-municipalizados-de-transportes-urbanos-de-coimbra/"
+  "Transparência SNS|GET|https://transparencia.sns.gov.pt/api/explore/v2.1/catalog/datasets?limit=1"
+  "APA (GEE xlsx)|GET?|https://sniambgeoviewer.apambiente.pt/GeoDocs/geoportaldocs/_Clima/PortalAcaoClimatica_Emissoes/Emissoes_GEE_Setor_PT.xlsx"
 )
 
 fail=0
@@ -35,6 +44,8 @@ fi
 
 for entry in "${CHECKS[@]}"; do
   IFS='|' read -r name method url <<< "$entry"
+  optional=0
+  if [[ "$method" == *"?" ]]; then optional=1; method="${method%\?}"; fi
   if [ "$method" = "POST" ]; then
     code=$(curl -s -o /dev/null -m 30 -A "$UA" -w '%{http_code}' -X POST \
       -H 'Content-Type: application/json' \
@@ -42,7 +53,9 @@ for entry in "${CHECKS[@]}"; do
   else
     code=$(curl -s -o /dev/null -m 30 -A "$UA" -w '%{http_code}' "$url")
   fi
-  if [[ "$code" =~ ^2 ]]; then status="ok"; else status="FALHOU"; fail=1; fi
+  if [[ "$code" =~ ^2 ]]; then status="ok"
+  elif [ $optional -eq 1 ]; then status="AVISO (instável)"
+  else status="FALHOU"; fail=1; fi
   if [ $MARKDOWN -eq 1 ]; then
     echo "| $name | $code | $status |"
   else

@@ -1,0 +1,18 @@
+{
+  "name": "portugal-open-data",
+  "description": "Skills for working with Portuguese and EU public data.",
+  "owner": {
+    "name": "Jorge Sousa",
+    "url": "https://github.com/jorgesousa"
+  },
+  "plugins": [
+    {
+      "name": "portugal-open-data",
+      "source": ".",
+      "description": "Catalog, domain skills and publishing checklist for Portuguese and EU public data.",
+      "version": "2.0.0",
+      "category": "data",
+      "tags": ["portugal", "open-data", "public-data"]
+    }
+  ]
+}

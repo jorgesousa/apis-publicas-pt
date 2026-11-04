@@ -1,9 +1,9 @@
 ---
-name: reunioes-municipais-pt
+name: pt-council-meetings
 description: How to find, read, transcribe and structure Portuguese municipal council meetings (Câmara Municipal and Assembleia Municipal) — minutes (atas), agendas and videos — using OpenCouncil's public MCP where it exists and a transcription pipeline elsewhere, with Portuguese privacy rules (CNPD) and the OParl data model. Use for questions about what a council discussed or decided, or when building tools on council meetings. Reuniões de câmara, assembleia municipal, atas, ordem do dia, vídeos, transcrição.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   verified: "2026-11-02"
 ---
 
@@ -11,7 +11,9 @@ metadata:
 
 Portugal has 308 municipalities, each with two bodies that meet in public: the **Câmara Municipal** (executive) and the **Assembleia Municipal** (deliberative). There is no national aggregator of their minutes or videos. Each council publishes in its own way, so the work is: find the sources, turn them into structured data, and publish without exposing private citizens.
 
-Last verified: 2026-11-02.
+Last verified: 2026-11-02. Part of the `portugal-open-data` skills.
+
+**Domains used:** `pt.opencouncil.eu`, `www.youtube.com` (RSS only), and each council's own site.
 
 ## Decision: use OpenCouncil, or build?
 
@@ -111,4 +113,4 @@ Use the OParl 1.1 names (`https://schema.oparl.org/1.1/`) so the data interopera
 - Decisions and votes: confirmed in the minutes?
 - Quotes: verbatim, with speaker role and a timestamped link.
 - Private citizens: anonymised.
-- For any numbers (budgets, contracts discussed), run the `verificar-dados-publicos` checks and get the figures from `apis-publicas-pt` sources rather than from what was said in the meeting.
+- For any numbers (budgets, contracts discussed), run the `pt-data-checks` checks and get the figures from `pt-local-finance` or `pt-public-procurement` sources rather than from what was said in the meeting.

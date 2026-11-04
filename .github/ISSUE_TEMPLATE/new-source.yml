@@ -1,0 +1,31 @@
+name: New source
+description: Propose a Portuguese or EU public data source for one of the skills.
+title: "[new source] "
+labels: ["source", "enhancement"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Source
+      placeholder: Registo Nacional de Alojamento Local
+    validations:
+      required: true
+  - type: input
+    id: skill
+    attributes:
+      label: Which skill should it go in?
+      placeholder: pt-tourism (new) / pt-territory / not sure
+  - type: input
+    id: endpoint
+    attributes:
+      label: Endpoint or download URL
+    validations:
+      required: true
+  - type: input
+    id: licence
+    attributes:
+      label: Licence (with link)
+  - type: textarea
+    id: why
+    attributes:
+      label: What questions does it answer? Any traps you know?

@@ -1,154 +1,157 @@
 <div align="center">
 
-# apis-publicas-pt
+<img src=".claude-plugin/icon.png" alt="" width="96">
 
-**Portugal's and the EU's public data, ready for your AI agent.**
+# Portugal Open Data
 
-Three skills for Claude, Claude Code and other agents that read `SKILL.md`: a curated catalog of Portuguese and EU open-data APIs, a checklist that stops the agent from publishing a misleading number, and a guide to Portuguese municipal council meetings.
+**Portugal publishes 20,983 open datasets.<br>These skills teach your AI agent where the right one is — and how not to misread it.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-2fa36b)](LICENSE)
-[![Verified](https://img.shields.io/badge/verified-2026--11--02-2fa36b)](skills/apis-publicas-pt/SKILL.md)
-[![Endpoints](https://github.com/jorgesousa/apis-publicas-pt/actions/workflows/check-endpoints.yml/badge.svg)](https://github.com/jorgesousa/apis-publicas-pt/actions/workflows/check-endpoints.yml)
+[![Skills](https://img.shields.io/badge/skills-11-f4c542)](#the-skills)
+[![Verified](https://img.shields.io/badge/verified-2026--11--04-2fa36b)](skills/portugal-open-data/SKILL.md)
+[![Endpoints](https://github.com/jorgesousa/portugal-open-data/actions/workflows/check-endpoints.yml/badge.svg)](https://github.com/jorgesousa/portugal-open-data/actions/workflows/check-endpoints.yml)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-f4c542)](CONTRIBUTING.md)
 
-<img src="docs/demo.gif" alt="Demo of the three skills: finding the INE source for municipal population, checking a draft chart before publishing, and finding the videos and minutes of Matosinhos council meetings" width="860">
+<img src="docs/demo.gif" alt="Animated overview: an agent answers a question about Arouca's 2025 public contracts with sources, nine domain skills each show one real data trap, and a weekly check confirms the sources still answer" width="860">
 
-**[Leia em português](README.pt.md)**
+[Install](#install) · [The skills](#the-skills) · [How it works](#how-it-works) · [**Help wanted**](#help-wanted) · [Roadmap](#roadmap) · [Leia em português](README.pt.md)
 
 </div>
 
 ---
 
-## The three skills
+## Why this exists
 
-| Skill | What it does |
-|---|---|
-| [`apis-publicas-pt`](skills/apis-publicas-pt/SKILL.md) | Catalog of 13 sources (plus the OParl data standard) — national statistics, weather, central banks, public procurement, parliament and local councils — each with endpoint, auth, licence, limits, pitfalls and a working example. |
-| [`verificar-dados-publicos`](skills/verificar-dados-publicos/SKILL.md) | Eight checks to run before publishing a number from public data: reference years, units, what it really measures, gaps, outliers, duplicated entities, fair comparison and licence. |
-| [`reunioes-municipais-pt`](skills/reunioes-municipais-pt/SKILL.md) | Council meetings (Câmara and Assembleia Municipal): OpenCouncil's public MCP where it exists, official minutes and videos elsewhere, a transcription pipeline, Portuguese privacy rules (CNPD) and the OParl data model. |
+Public data is easy to fetch and easy to get wrong. Most mistakes are not in the API call but in what the number means. An agent left alone will happily:
 
-They work alone, but are made to be used together: the catalog finds and calls the data, the checklist makes sure the answer is honest about it, and the meetings guide covers what councils discuss and decide.
+| You ask | A plain agent | An agent with these skills |
+|---|---|---|
+| "How much did Arouca council spend in 2025?" | Adds up contract values and calls it spending. | 163 contracts, €18.05 M signed in 2025 (Portal BASE). Says contracts are not total spending and shows the council's expenditure from INE/DGAL next to it, with both years. |
+| "Which is the best secondary school in Coimbra?" | Ranks raw averages, which mostly rank family income. | Compares each school with pupils of a **similar profile** ("observed vs expected"), shows sample sizes and says the data is from the February 2025 edition. |
+| "Is there a bus at 8:00 on Saturday?" | Reads the timetable file and answers. | Checks first that the feed has not expired — the Coimbra one ends on 12 November. |
+| "Can I use this list of psychologists for my business?" | "It's public domain, go ahead." | The licence is open, but it is a list of named people with phones and e-mails: use counts, not contacts. |
 
-## Why
+Every trap in these skills was hit in real work and is written down with the date it was checked.
 
-The best-known API list on GitHub, [public-apis](https://github.com/public-apis/public-apis), has 2,000+ entries. For Portugal it has almost nothing:
+## The skills
 
-| Source | public-apis | apis-publicas-pt |
-|---|:---:|:---:|
-| dados.gov.pt | ✅ | ✅ |
-| IPMA (weather) | ✅ | ✅ |
-| INE (Statistics Portugal), incl. municipal budgets | ❌ | ✅ |
-| Banco de Portugal (BPstat) | ❌ | ✅ |
-| Assembleia da República (parliament) | ❌ | ✅ |
-| OpenCouncil Portugal (council meetings) | ❌ | ✅ |
-| Eurostat | ❌ | ✅ |
-| European Central Bank | ❌ | ✅ |
-| TED (EU public procurement) | ❌ | ✅ |
+| | Skill | What your agent learns |
+|---|---|---|
+| 🧭 | [`portugal-open-data`](skills/portugal-open-data/SKILL.md) | **Start here.** Rules for calling public sources, the general ones (dados.gov.pt, INE, IPMA, Banco de Portugal, Parliament, Eurostat, ECB) and which skill to use next. |
+| ✅ | [`pt-data-checks`](skills/pt-data-checks/SKILL.md) | Eight checks before publishing any number: years, units, what it measures, gaps, outliers, duplicates, fair comparison, licence. |
+| 🧾 | [`pt-public-procurement`](skills/pt-public-procurement/SKILL.md) | Portal BASE and TED. Every field and how often it is filled in; signing year vs publication; suppliers by tax number. |
+| 🗺️ | [`pt-territory`](skills/pt-territory/SKILL.md) | Official boundaries (CAOP), municipality and parish codes, NUTS, the 2025 parish restoration, projections. |
+| 🏫 | [`pt-schools`](skills/pt-schools/SKILL.md) | InfoEscolas for every school: results against pupils of a similar profile, retention, internal grades, equity. |
+| 💶 | [`pt-local-finance`](skills/pt-local-finance/SKILL.md) | Council revenue, expenditure and debt (INE/DGAL), budgets, transfers, IMI. |
+| 🏛️ | [`pt-council-meetings`](skills/pt-council-meetings/SKILL.md) | Minutes, agendas and videos; OpenCouncil's public MCP; privacy rules for members of the public. |
+| 🗄️ | [`pt-web-archive`](skills/pt-web-archive/SKILL.md) | Arquivo.pt: what a Portuguese website said in 2009, found by text or URL. |
+| 🚌 | [`pt-mobility`](skills/pt-mobility/SKILL.md) | GTFS and NeTEx timetables by operator, bike sharing, EV charging, road and rail networks. |
+| 🏥 | [`pt-health`](skills/pt-health/SKILL.md) | Transparência SNS, ACSS, INFARMED, INEM — and why the same dataset appears twice with two licences. |
+| 🌊 | [`pt-environment`](skills/pt-environment/SKILL.md) | APA water and air data, emissions, flood risk, rural fires, civil protection. |
 
-And a link is not enough. Before building anything you need to know whether the API needs a key, whether you can use the data in a commercial product, and where the traps are — like INE's municipal finance figures being in **thousands** of euros, or Eurostat returning an empty "latest" year. That is what these skills give your agent.
+Each skill loads only when a request needs it, so installing all eleven costs nothing until they are used.
 
-## What's in the catalog
+## How it works
 
-| Source | What you get | Key | Licence | Status |
-|---|---|:---:|---|---|
-| [dados.gov.pt](https://dados.gov.pt) | National open-data portal (Portal BASE contracts, councils, agencies) | no | per dataset | ✅ |
-| [INE](https://www.ine.pt) | Official statistics: population, municipal revenue and expenditure | no | CC BY | ✅ |
-| [IPMA](https://api.ipma.pt) | Forecasts, warnings, earthquakes, fire risk | no | ⚠ non-profit only | ✅ |
-| [Banco de Portugal](https://bpstat.bportugal.pt) | BPstat economic and financial series | no | free reuse (ESCB) | ✅ |
-| [GeoAPI.pt](https://geoapi.pt) | Municipalities, parishes, postcodes (unofficial) | no | not stated | ✅ |
-| [Assembleia da República](https://www.parlamento.pt/Cidadania/Paginas/DadosAbertos.aspx) | Initiatives, votes, debates, MPs (XML/JSON files) | no | attribution required | ✅ |
-| [OpenCouncil Portugal](https://pt.opencouncil.eu) | Transcribed council meetings, with a public MCP server (Cascais so far) | no | free reuse | ✅ |
-| [Eurostat](https://ec.europa.eu/eurostat) | EU statistics (JSON-stat, SDMX) | no | free, incl. commercial | ✅ |
-| [ECB](https://data.ecb.europa.eu) | Exchange rates, interest rates, monetary data | no | free, incl. commercial | ✅ |
-| [TED](https://ted.europa.eu) | EU public procurement above thresholds | no | to confirm | ✅ |
-| [data.europa.eu](https://data.europa.eu) | European data portal | no | per dataset | 🔍 |
-| [Open-Meteo](https://open-meteo.com) | Global weather | no | ⚠ non-commercial | ✅ |
-| OParl | Data model for council information (reference standard) | — | — | 📐 |
-| Transparência SNS | Health service data | — | — | 🔍 |
+```mermaid
+flowchart LR
+    Q["Your question<br/>(English or Portuguese)"] --> E["portugal-open-data<br/>rules + routing"]
+    E --> D["Domain skill<br/>e.g. pt-schools"]
+    D --> S[("Official source<br/>InfoEscolas, INE, Portal BASE…")]
+    S --> C["pt-data-checks<br/>years · units · gaps · licence"]
+    C --> A["Answer with sources,<br/>dates and caveats"]
+```
 
-✅ endpoint answered in the [weekly check](.github/workflows/check-endpoints.yml) · 🔍 responds, but query details still to verify · 📐 a standard, not a data source.
+The skills are text. They make no requests and need no keys: they tell your agent where to ask, what the answer means and where it lies. If your environment blocks a domain, the agent is told to stop and name it, never to get around the block.
 
 ## Install
 
-### claude.ai (web, desktop, mobile)
-1. Download the zips from [`dist/`](dist/): [`apis-publicas-pt.zip`](dist/apis-publicas-pt.zip), [`verificar-dados-publicos.zip`](dist/verificar-dados-publicos.zip) and [`reunioes-municipais-pt.zip`](dist/reunioes-municipais-pt.zip).
-2. Upload them in the skills section of your claude.ai settings.
-3. If your plan restricts network access, allow the domains you need (see [Network](#network)).
-
-### Claude Code
-```bash
-git clone https://github.com/jorgesousa/apis-publicas-pt.git
-mkdir -p ~/.claude/skills
-cp -r apis-publicas-pt/skills/* ~/.claude/skills/
+**Claude Code** — as a plugin:
 ```
-For a single project, copy the folders into that project's `.claude/skills/` instead.
-
-### With the `skills` CLI (Claude Code, Cursor, Codex and other agents)
-```bash
-npx skills add jorgesousa/apis-publicas-pt
+/plugin marketplace add jorgesousa/portugal-open-data
+/plugin install portugal-open-data@portugal-open-data
 ```
+
+**claude.ai** (web, desktop, mobile) — download the zips from [`dist/`](dist/) (one per skill; start with `portugal-open-data.zip` and `pt-data-checks.zip`) and upload them in your settings, under skills.
+
+**Cursor, Codex and other agents:**
+```bash
+npx skills add jorgesousa/portugal-open-data
+```
+
+**By hand:** copy the folders in `skills/` to `~/.claude/skills/`.
 
 ## Try it
 
-Once installed, the skills kick in on their own when a request involves Portuguese or EU public data. Ask in English or Portuguese:
-
-- "What was Coimbra's resident population in 2023? Cite the source."
-- "Which public procurement datasets are on dados.gov.pt, and what licence does each one have?"
-- "Is there a weather warning for Coimbra today?"
-- "What did Cascais council discuss about housing this year? Quote the councillors."
-- "Where can I find the minutes and videos of Matosinhos municipal assembly?"
+- "Which suppliers got the most from Arouca council in 2025? Join them by tax number."
+- "Compare the secondary schools in Coimbra fairly."
+- "How much does Braga council owe per resident, compared with similar municipalities?"
+- "What did the Coimbra council website say about the Metro Mondego in 2015?"
+- "How many bus departures does this parish get on a weekday?"
 - "Can I use IPMA weather data in a paid app?"
 
-## Network
+## Help wanted
 
-The skills make no requests themselves: they tell the agent where and how to ask. If your environment only allows approved domains, the catalog uses:
+**This is an open project, and Portugal's public data is bigger than one person.** If you work with Portuguese data — as a developer, journalist, researcher, civil servant or curious citizen — you already know a trap that is not written down here. That is the most useful contribution there is.
 
-`dados.gov.pt` · `www.ine.pt` · `api.ipma.pt` · `bpstat.bportugal.pt` · `json.geoapi.pt` · `www.parlamento.pt` · `app.parlamento.pt` · `pt.opencouncil.eu` · `ec.europa.eu` · `data-api.ecb.europa.eu` · `api.ted.europa.eu` · `data.europa.eu` · `api.open-meteo.com`
+### 15 minutes: verify one source
+These entries are marked "to verify" in the skills. Test one, write down what you found, open a pull request.
 
-If a domain is blocked, the skill tells the agent to stop and name it, instead of trying to get around the block.
+- [ ] Transparência SNS: record queries (`/records?where=…`) on a real dataset — `pt-health`
+- [ ] Arquivo.pt: the CDX server and the image search API — `pt-web-archive`
+- [ ] SNIRH and QualAr: is there a stable way to download readings? — `pt-environment`
+- [ ] ProCiv occurrences: the endpoint listed on dados.gov.pt dates from 2021 — `pt-environment`
+- [ ] AGIT planner API (Região de Coimbra) — `pt-mobility`
+- [ ] CP, Metro do Porto, STCP: where are their GTFS feeds? — `pt-mobility`
+- [ ] State transfers to each municipality (FEF, FSM) as data, not PDF — `pt-local-finance`
+- [ ] GeoAPI.pt: confirm the paths and the licence — `pt-territory`
+- [ ] TED: confirm the query syntax and the licence — `pt-public-procurement`
 
-## Safety and principles
+### An afternoon: tell us what lies
+Found a number that means something other than what it seems? A field that is always empty, a unit that changed, a file that moved? [Open an issue](../../issues/new/choose) with the dataset and what you saw. We turn it into a rule.
 
-- **Text only.** Each skill is a single `SKILL.md`. Nothing to install, no scripts, no dependencies.
-- **No keys.** Every source is readable without registering. The agent is told never to put credentials in URLs or files.
-- **Licences up front.** The agent cites source and date, and warns when a licence forbids commercial use.
-- **Honest about gaps.** Anything untested is marked "to verify" and should not reach production.
+### A weekend: write a domain skill
+See [Roadmap](#roadmap) and the [skill template](docs/skill-template.md). One domain, one folder, one `SKILL.md` under 500 lines.
 
-## Keeping it current
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before your first pull request. Contributions in English or Portuguese are welcome.
 
-Public APIs change, so:
+## Roadmap
 
-- **Weekly check:** a [GitHub Actions workflow](.github/workflows/check-endpoints.yml) calls every endpoint on Mondays and publishes the result. Run `./scripts/check-endpoints.sh` to check locally.
-- **Verification date:** each version says when it was verified. Entries older than six months get re-checked before anyone relies on them.
+| Next skill | Where the data is | Why |
+|---|---|---|
+| `pt-elections` | Comissão Nacional de Eleições (33 datasets on dados.gov.pt), Ministry results | Results by parish need the territory rules and fair comparisons |
+| `pt-housing` | INE median rents and sales by municipality (among the most reused data on the portal), IMI rates | High demand, many per-m² and per-quarter traps |
+| `pt-tourism` | Turismo de Portugal (314 datasets), local accommodation registers | Big, scattered, mostly per municipality |
+| `pt-energy` | DGEG, LNEG (OGC API), INE energy indicators | Renewable shares, maps of resources |
+| `pt-companies` | IRN, startup status list, Portal BASE suppliers | Who the companies are behind the tax numbers |
+| `pt-parliament` | Assembleia da República open data (now in the entry skill) | Deserves its own method: votes, initiatives, MPs |
 
-## Contributing
+Have another idea? Open an issue with the "new skill" template.
 
-Missing a source? Open an issue or a pull request. A source joins the catalog only with:
+## Keeping it honest
 
-1. a tested endpoint (or marked "to verify");
-2. auth;
-3. licence, with a link to the terms;
-4. limits (or "not published");
-5. an example call;
-6. the verification date.
-
-After editing a `SKILL.md`, rebuild the claude.ai zips with `./scripts/build-zip.sh`.
+- **Weekly check.** A [GitHub Actions workflow](.github/workflows/check-endpoints.yml) calls every source on Mondays. Sources that are known to be unstable give a warning instead of failing.
+- **Validation on every pull request.** [`scripts/validate-skills.py`](scripts/validate-skills.py) checks names, descriptions, length, links and references between skills.
+- **Dates everywhere.** Each skill has `metadata.verified`; anything older than six months gets re-checked before anyone relies on it.
+- **No personal data.** Lists of named people are aggregated, never republished for a new purpose.
 
 ## Layout
 
 ```
-skills/apis-publicas-pt/SKILL.md          the catalog
-skills/verificar-dados-publicos/SKILL.md  the checklist
-skills/reunioes-municipais-pt/SKILL.md    the council meetings guide
-dist/*.zip                                the same skills, ready to upload to claude.ai
-scripts/check-endpoints.sh                checks every source still answers
-scripts/build-zip.sh                      builds the zips
-.github/workflows/                        weekly check
-docs/                                     README images
-README.pt.md                              Portuguese README
+.claude-plugin/          plugin and marketplace manifests, icon
+skills/<name>/SKILL.md   one folder per skill (some with references/)
+dist/*.zip               one zip per skill, for claude.ai
+scripts/                 endpoint check, skill validator, zip builder
+docs/                    skill template, README images
+.github/                 workflows, issue and pull-request templates
 ```
+
+## Coming from `apis-publicas-pt`?
+
+Version 2.0.0 renamed the project and split the old catalog into an entry point and domain skills: `apis-publicas-pt` → `portugal-open-data`, `verificar-dados-publicos` → `pt-data-checks`, `reunioes-municipais-pt` → `pt-council-meetings`. Remove the old zips and install the new ones.
 
 ## License
 
-[MIT](LICENSE) © 2026 [Jorge Sousa](https://github.com/jorgesousa)
+[MIT](LICENSE) © 2026 [Jorge Sousa](https://github.com/jorgesousa) and contributors.
 
 Not affiliated with any of the sources listed. The data belongs to each source and follows its own terms.
