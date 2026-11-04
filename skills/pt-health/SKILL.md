@@ -18,11 +18,11 @@ Part of the `portugal-open-data` skills. Most SNS open data is published on **Tr
 - **Datasets:** each has an id visible in its URL, e.g. `atendimentos-em-urgencia-triagem-manchester`, `atendimentos-por-tipo-de-urgencia-hospitalar-link`, `acesso-de-consultas-medicas-pela-populacao-inscrita`, `atividade-de-internamento-hospitalar`, `acionamentos-de-meios-de-emergencia-medica`, `agregados-economico-financeiros`, `antibioticos`, `portal-base` (public contracts in health).
 - **Exports (pattern seen in dados.gov.pt resources):**
   `https://transparencia.sns.gov.pt/explore/dataset/{id}/download?format=csv|json&timezone=Europe/Lisbon&use_labels_for_header=true`
-- **API (standard Opendatasoft v2.1, to verify on this portal):**
+- **API (Opendatasoft v2.1):**
   `https://transparencia.sns.gov.pt/api/explore/v2.1/catalog/datasets?limit=20` (catalogue) and
   `https://transparencia.sns.gov.pt/api/explore/v2.1/catalog/datasets/{id}/records?limit=100&where=…&order_by=…` (records; `limit` max 100 per call — use the exports for full tables).
 - **Auth:** none. **Licence:** shown per dataset on the portal; check each one (see trap 1).
-- **Status:** the export links are confirmed through dados.gov.pt; the API itself was not reachable from the environment where this skill was written — test it before relying on it.
+- **Status:** the catalogue endpoint answered 200 in the weekly check (2026-11-04); the export links are confirmed through dados.gov.pt. The `records` query parameters follow the Opendatasoft standard and have not been tested record by record.
 
 ## Who publishes what (dataset counts on dados.gov.pt, 2026-11-03)
 

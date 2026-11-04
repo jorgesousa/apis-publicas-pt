@@ -29,12 +29,13 @@ Part of the `portugal-open-data` skills. APA is the second-largest publisher on 
 | Civil-protection occurrences | ANEPC "ProCiv - Ocorrências em aberto" | API listed on dados.gov.pt (CC BY) | The listed endpoints on `www.prociv.pt/_vti_bin/…` date from 2021 and point to the old site — likely outdated, to verify |
 
 ## Traps
-1. **`notspecified` licence** on almost every APA dataset. Fine for analysis and research; ask APA or the user before putting the data in a commercial product.
-2. **Maps, not numbers.** Many APA "datasets" are station networks or zones. To get measurements you need the source portal (SNIRH, QualAr), not the WMS.
-3. **Duplicates.** The same layer appears with different update dates and frequencies (e.g. two "Rede de estações hidrométricas" records). Prefer the newest file and say which.
-4. **Coordinates.** Shapefiles usually come in PT-TM06/ETRS89 (EPSG:3763); reproject (see `pt-territory`).
-5. **PDF reports** (bathing water, air quality summaries) need text extraction and a check of every extracted number against the PDF.
-6. **Weather is IPMA**, not APA: forecasts, warnings and fire risk are in `portugal-open-data` (IPMA section, non-profit use only).
+1. **The file server is unstable.** `sniambgeoviewer.apambiente.pt` did not answer from GitHub's servers in the 2026-11-04 check. Retry later, and keep a local copy once a file downloads.
+2. **`notspecified` licence** on almost every APA dataset. Fine for analysis and research; ask APA or the user before putting the data in a commercial product.
+3. **Maps, not numbers.** Many APA "datasets" are station networks or zones. To get measurements you need the source portal (SNIRH, QualAr), not the WMS.
+4. **Duplicates.** The same layer appears with different update dates and frequencies (e.g. two "Rede de estações hidrométricas" records). Prefer the newest file and say which.
+5. **Coordinates.** Shapefiles usually come in PT-TM06/ETRS89 (EPSG:3763); reproject (see `pt-territory`).
+6. **PDF reports** (bathing water, air quality summaries) need text extraction and a check of every extracted number against the PDF.
+7. **Weather is IPMA**, not APA: forecasts, warnings and fire risk are in `portugal-open-data` (IPMA section, non-profit use only).
 
 ## Method for "is the water/air near X OK"
 1. Find the nearest stations from the APA station layers (distance in a projected CRS).

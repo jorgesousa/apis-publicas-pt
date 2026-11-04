@@ -3,6 +3,7 @@
 # Uso: ./scripts/check-endpoints.sh            (tabela no terminal)
 #      ./scripts/check-endpoints.sh --markdown (tabela Markdown, para o resumo do GitHub Actions)
 # Só faz pedidos GET/POST de leitura, sem credenciais. Sai com código 1 se alguma fonte falhar.
+# Fontes com método terminado em "?" (ex.: "GET?") são instáveis: uma falha dá AVISO e não faz falhar a verificação.
 
 set -u
 MARKDOWN=0
@@ -32,7 +33,7 @@ CHECKS=(
   "Arquivo.pt|GET|https://arquivo.pt/textsearch?q=coimbra&maxItems=1&prettyPrint=false"
   "GTFS SMTUC (dados.gov.pt)|GET|https://dados.gov.pt/api/1/datasets/gtfs-estaticos-servicos-municipalizados-de-transportes-urbanos-de-coimbra/"
   "Transparência SNS|GET|https://transparencia.sns.gov.pt/api/explore/v2.1/catalog/datasets?limit=1"
-  "APA (GEE xlsx)|GET|https://sniambgeoviewer.apambiente.pt/GeoDocs/geoportaldocs/_Clima/PortalAcaoClimatica_Emissoes/Emissoes_GEE_Setor_PT.xlsx"
+  "APA (GEE xlsx)|GET?|https://sniambgeoviewer.apambiente.pt/GeoDocs/geoportaldocs/_Clima/PortalAcaoClimatica_Emissoes/Emissoes_GEE_Setor_PT.xlsx"
 )
 
 fail=0
@@ -43,6 +44,8 @@ fi
 
 for entry in "${CHECKS[@]}"; do
   IFS='|' read -r name method url <<< "$entry"
+  optional=0
+  if [[ "$method" == *"?" ]]; then optional=1; method="${method%\?}"; fi
   if [ "$method" = "POST" ]; then
     code=$(curl -s -o /dev/null -m 30 -A "$UA" -w '%{http_code}' -X POST \
       -H 'Content-Type: application/json' \
@@ -50,7 +53,9 @@ for entry in "${CHECKS[@]}"; do
   else
     code=$(curl -s -o /dev/null -m 30 -A "$UA" -w '%{http_code}' "$url")
   fi
-  if [[ "$code" =~ ^2 ]]; then status="ok"; else status="FALHOU"; fail=1; fi
+  if [[ "$code" =~ ^2 ]]; then status="ok"
+  elif [ $optional -eq 1 ]; then status="AVISO (instável)"
+  else status="FALHOU"; fail=1; fi
   if [ $MARKDOWN -eq 1 ]; then
     echo "| $name | $code | $status |"
   else

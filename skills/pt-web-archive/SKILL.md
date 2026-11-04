@@ -13,7 +13,7 @@ Part of the `portugal-open-data` skills. Arquivo.pt (run by FCT/FCCN) has preser
 
 **Domain used:** `arquivo.pt`. Licence of the API dataset on dados.gov.pt: CC BY 4.0. The archived pages keep their original authors' rights: quote and link, do not republish whole pages.
 
-## TextSearch API (verified from the official documentation)
+## TextSearch API (documented by Arquivo.pt; endpoint answered in the 2026-11-04 check)
 
 Endpoint: `https://arquivo.pt/textsearch` → JSON.
 
