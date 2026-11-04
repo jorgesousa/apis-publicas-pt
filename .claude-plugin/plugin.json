@@ -1,0 +1,14 @@
+{
+  "name": "portugal-open-data",
+  "displayName": "Portugal Open Data",
+  "version": "2.0.0",
+  "description": "Portugal's public data, ready for your AI agent: a catalog of Portuguese and EU sources, domain skills (public procurement, territory, schools, local finance, council meetings, web archive, mobility, health, environment) and a checklist to run before publishing any number.",
+  "author": {
+    "name": "Jorge Sousa",
+    "url": "https://github.com/jorgesousa"
+  },
+  "homepage": "https://github.com/jorgesousa/portugal-open-data",
+  "repository": "https://github.com/jorgesousa/portugal-open-data",
+  "license": "MIT",
+  "keywords": ["portugal", "open-data", "dados-abertos", "public-data", "ine", "dados.gov.pt", "portal-base", "eurostat"]
+}

@@ -1,16 +1,18 @@
 <div align="center">
 
-# apis-publicas-pt
+# portugal-open-data
 
-**Os dados públicos de Portugal e da UE, prontos para o teu agente de IA.**
+**Os dados públicos de Portugal, prontos para o teu agente de IA.**
 
-Três skills para Claude, Claude Code e outros agentes que leem `SKILL.md`: um catálogo curado de APIs de dados abertos de Portugal e da UE, uma lista de verificações que impede o agente de publicar um número enganador, e um guia para as reuniões das câmaras e assembleias municipais.
+Onze skills para Claude, Claude Code e outros agentes que leem `SKILL.md`: uma porta de entrada para as fontes de dados abertos de Portugal e da UE, nove skills de domínio que sabem onde está cada tipo de dado e onde engana, e uma lista de verificações que impede o agente de publicar um número enganador.
 
 [![Licença: MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-2fa36b)](LICENSE)
-[![Verificado em](https://img.shields.io/badge/verificado-2026--11--02-2fa36b)](skills/apis-publicas-pt/SKILL.md)
-[![Endpoints](https://github.com/jorgesousa/apis-publicas-pt/actions/workflows/check-endpoints.yml/badge.svg)](https://github.com/jorgesousa/apis-publicas-pt/actions/workflows/check-endpoints.yml)
+[![Verificado em](https://img.shields.io/badge/verificado-2026--11--04-2fa36b)](skills/portugal-open-data/SKILL.md)
+[![Endpoints](https://github.com/jorgesousa/portugal-open-data/actions/workflows/check-endpoints.yml/badge.svg)](https://github.com/jorgesousa/portugal-open-data/actions/workflows/check-endpoints.yml)
 
-<img src="docs/demo.gif" alt="Demonstração das três skills: encontrar a fonte do INE para a população por município, verificar um gráfico antes de o publicar, e encontrar os vídeos e as atas das reuniões de Matosinhos" width="860">
+<img src="docs/demo.gif" alt="Demonstração gravada com a versão 1: encontrar a fonte do INE para a população por município, verificar um gráfico antes de o publicar, e encontrar os vídeos e as atas das reuniões de Matosinhos" width="860">
+
+<sub>Demonstração gravada com a versão 1 (três skills, nomes antigos).</sub>
 
 **[Read in English](README.md)**
 
@@ -18,114 +20,114 @@ Três skills para Claude, Claude Code e outros agentes que leem `SKILL.md`: um c
 
 ---
 
-## As três skills
+## As skills
 
-| Skill | O que faz |
+| Skill | O que cobre |
 |---|---|
-| [`apis-publicas-pt`](skills/apis-publicas-pt/SKILL.md) | Catálogo de 13 fontes (mais a norma OParl) — estatística oficial, meteorologia, bancos centrais, contratação pública, parlamento e câmaras municipais — cada uma com endpoint, autenticação, licença, limites, armadilhas e um exemplo que funciona. |
-| [`verificar-dados-publicos`](skills/verificar-dados-publicos/SKILL.md) | Oito verificações antes de publicar um número com dados públicos: anos de referência, unidades, o que o número mede, lacunas, valores extremos, entidades duplicadas, comparação justa e licença. |
-| [`reunioes-municipais-pt`](skills/reunioes-municipais-pt/SKILL.md) | Reuniões de câmara e assembleia municipal: o MCP público do OpenCouncil onde existe, atas e vídeos oficiais nos outros municípios, um pipeline de transcrição, as regras de privacidade da CNPD e o modelo de dados OParl. |
+| [`portugal-open-data`](skills/portugal-open-data/SKILL.md) | **Começa aqui.** Regras para chamar fontes públicas, as fontes gerais (dados.gov.pt, INE, IPMA, Banco de Portugal, Parlamento, Eurostat, BCE) e qual a skill de domínio a usar. |
+| [`pt-data-checks`](skills/pt-data-checks/SKILL.md) | Oito verificações antes de publicar um número: anos de referência, unidades, o que mede, lacunas, extremos, entidades duplicadas, comparação justa, licença. |
+| [`pt-public-procurement`](skills/pt-public-procurement/SKILL.md) | Contratos, anúncios, modificações e entidades do Portal BASE; TED. Significado e preenchimento de cada campo, ano de celebração vs data de publicação, fornecedores por NIF. |
+| [`pt-territory`](skills/pt-territory/SKILL.md) | Limites da CAOP, códigos de concelhos e freguesias, NUTS, a reposição de freguesias de 2025, projeções, BUPi. |
+| [`pt-schools`](skills/pt-schools/SKILL.md) | Ficheiros do InfoEscolas para todas as escolas: "observado vs esperado" para alunos de perfil semelhante, retenção, classificações internas, equidade. |
+| [`pt-local-finance`](skills/pt-local-finance/SKILL.md) | Receitas, despesas e dívida das câmaras (INE/DGAL), orçamentos, transferências, IMI — e porque contratos não são despesa. |
+| [`pt-council-meetings`](skills/pt-council-meetings/SKILL.md) | Reuniões de câmara e assembleia: MCP público do OpenCouncil, atas e vídeos oficiais, transcrição, regras da CNPD, OParl. |
+| [`pt-web-archive`](skills/pt-web-archive/SKILL.md) | Arquivo.pt: pesquisa de texto e histórico de versões dos sites portugueses desde 1996. |
+| [`pt-mobility`](skills/pt-mobility/SKILL.md) | Horários GTFS e NeTEx por operador, bicicletas partilhadas, carregamento elétrico, redes rodoviária e ferroviária. |
+| [`pt-health`](skills/pt-health/SKILL.md) | Transparência SNS, ACSS, INFARMED, INEM; cópias duplicadas com licenças diferentes; listas de profissionais como dados pessoais. |
+| [`pt-environment`](skills/pt-environment/SKILL.md) | Água e ar da APA, emissões, risco de inundação, incêndios rurais, proteção civil. |
 
-Funcionam sozinhas, mas foram feitas para andar juntas: o catálogo encontra e chama os dados, a verificação garante que a resposta é honesta sobre eles, e o guia das reuniões cobre o que as câmaras discutem e decidem.
+A porta de entrada encaminha, as skills de domínio vão ao detalhe e a verificação garante que a resposta é honesta. Cada skill só é carregada quando um pedido precisa dela, por isso instalar todas não custa nada até serem usadas.
 
 As skills estão escritas em inglês para chegarem a mais gente, mas mantêm os nomes oficiais portugueses e reagem a pedidos em português. O agente responde na tua língua.
 
 ## Porquê
 
-O catálogo de APIs mais conhecido do GitHub, [public-apis](https://github.com/public-apis/public-apis), tem mais de 2 000 entradas. Para Portugal quase nada:
+O catálogo de APIs mais conhecido do GitHub, [public-apis](https://github.com/public-apis/public-apis), tem mais de 2 000 entradas e quase nada para Portugal. O [devpt-org/public-data-portugal](https://github.com/devpt-org/public-data-portugal) lista 57 fontes portuguesas, como links. Nenhum diz ao teu agente:
 
-| Fonte | public-apis | apis-publicas-pt |
-|---|:---:|:---:|
-| dados.gov.pt | ✅ | ✅ |
-| IPMA | ✅ | ✅ |
-| INE, incluindo receitas e despesas das câmaras | ❌ | ✅ |
-| Banco de Portugal (BPstat) | ❌ | ✅ |
-| Assembleia da República | ❌ | ✅ |
-| OpenCouncil Portugal (reuniões de câmara) | ❌ | ✅ |
-| Eurostat | ❌ | ✅ |
-| Banco Central Europeu | ❌ | ✅ |
-| TED (contratos públicos da UE) | ❌ | ✅ |
+- se uma fonte pede chave, e se a podes usar num produto comercial;
+- que as finanças municipais do INE vêm em **milhares** de euros;
+- que o campo `Ano` do Portal BASE é o ano em que o contrato foi **celebrado**, não publicado, e que o preço efetivamente pago só está preenchido em 8% dos contratos;
+- que os resultados das escolas só fazem sentido comparados com alunos de **perfil semelhante**, e que `*` quer dizer suprimido, não zero;
+- que um feed GTFS pode expirar na próxima semana, ou que uma lista de psicólogos com licença aberta continua a ser dados pessoais.
 
-E um link não chega. Antes de construir alguma coisa precisas de saber se a API pede chave, se podes usar os dados num produto comercial e onde estão as armadilhas — como as finanças municipais do INE virem em **milhares** de euros, ou o Eurostat devolver vazio o "último ano". É isso que estas skills dão ao teu agente.
-
-## O que está no catálogo
-
-| Fonte | O que tens lá | Chave | Licença | Estado |
-|---|---|:---:|---|---|
-| [dados.gov.pt](https://dados.gov.pt) | Portal nacional de dados abertos (contratos do Portal BASE, câmaras, organismos) | não | por dataset | ✅ |
-| [INE](https://www.ine.pt) | Estatística oficial: população, receitas e despesas das câmaras | não | CC BY | ✅ |
-| [IPMA](https://api.ipma.pt) | Previsão, avisos, sismos, risco de incêndio | não | ⚠ sem fins lucrativos | ✅ |
-| [Banco de Portugal](https://bpstat.bportugal.pt) | BPstat: séries económicas e financeiras | não | reutilização livre (SEBC) | ✅ |
-| [GeoAPI.pt](https://geoapi.pt) | Municípios, freguesias, códigos postais (não oficial) | não | não indicada | ✅ |
-| [Assembleia da República](https://www.parlamento.pt/Cidadania/Paginas/DadosAbertos.aspx) | Iniciativas, votações, debates, deputados (ficheiros XML/JSON) | não | atribuição obrigatória | ✅ |
-| [OpenCouncil Portugal](https://pt.opencouncil.eu) | Reuniões de câmara transcritas, com servidor MCP público (para já, Cascais) | não | reutilização livre | ✅ |
-| [Eurostat](https://ec.europa.eu/eurostat) | Estatística europeia (JSON-stat, SDMX) | não | livre, incl. comercial | ✅ |
-| [BCE](https://data.ecb.europa.eu) | Câmbios, taxas de juro, agregados monetários | não | livre, incl. comercial | ✅ |
-| [TED](https://ted.europa.eu) | Contratos públicos acima dos limiares europeus | não | por confirmar | ✅ |
-| [data.europa.eu](https://data.europa.eu) | Portal europeu de dados | não | por dataset | 🔍 |
-| [Open-Meteo](https://open-meteo.com) | Meteorologia global | não | ⚠ não comercial | ✅ |
-| OParl | Modelo de dados para informação municipal (norma de referência) | — | — | 📐 |
-| Transparência SNS | Dados do Serviço Nacional de Saúde | — | — | 🔍 |
-
-✅ endpoint respondeu na [verificação semanal](.github/workflows/check-endpoints.yml) · 🔍 responde, mas faltam confirmar detalhes da consulta · 📐 é uma norma, não uma fonte de dados.
+É isso que estas skills levam. Cada armadilha vem de trabalho real, com a data em que foi verificada.
 
 ## Instalar
 
-### claude.ai (web, desktop, telemóvel)
-1. Descarrega os zips de [`dist/`](dist/): [`apis-publicas-pt.zip`](dist/apis-publicas-pt.zip), [`verificar-dados-publicos.zip`](dist/verificar-dados-publicos.zip) e [`reunioes-municipais-pt.zip`](dist/reunioes-municipais-pt.zip).
-2. Carrega-os na secção de skills das definições do claude.ai.
-3. Se o teu plano limitar o acesso à rede, permite os domínios de que precisas (ver [Rede](#rede)).
-
-### Claude Code
-```bash
-git clone https://github.com/jorgesousa/apis-publicas-pt.git
-mkdir -p ~/.claude/skills
-cp -r apis-publicas-pt/skills/* ~/.claude/skills/
+### Claude Code (plugin)
 ```
-Para um só projeto, copia as pastas para `.claude/skills/` dentro do projeto.
+/plugin marketplace add jorgesousa/portugal-open-data
+/plugin install portugal-open-data@portugal-open-data
+```
+As skills aparecem como `portugal-open-data:pt-schools`, `portugal-open-data:pt-public-procurement`, etc.
 
-### Com a CLI `skills` (Claude Code, Cursor, Codex e outros agentes)
+### claude.ai (web, desktop, telemóvel)
+1. Descarrega os zips em [`dist/`](dist/) — um por skill. Começa por `portugal-open-data.zip` e `pt-data-checks.zip` e junta os domínios de que precisas.
+2. Carrega-os na secção de skills das definições do claude.ai.
+3. Se o teu plano restringe o acesso à rede, autoriza os domínios que cada skill indica.
+
+### Outros agentes (CLI `skills`: Cursor, Codex e outros)
 ```bash
-npx skills add jorgesousa/apis-publicas-pt
+npx skills add jorgesousa/portugal-open-data
+```
+
+### À mão
+```bash
+git clone https://github.com/jorgesousa/portugal-open-data.git
+mkdir -p ~/.claude/skills && cp -r portugal-open-data/skills/* ~/.claude/skills/
 ```
 
 ## Experimenta
 
-Depois de instaladas, as skills entram sozinhas quando o pedido envolve dados públicos portugueses ou europeus:
+Pergunta em português ou em inglês:
 
-- "Qual era a população residente em Coimbra em 2023? Cita a fonte."
-- "Que conjuntos de dados de contratação pública existem no dados.gov.pt, e com que licença?"
-- "Há algum aviso meteorológico para Coimbra hoje?"
-- "O que discutiu a Câmara de Cascais sobre habitação este ano? Cita os vereadores."
-- "Onde encontro as atas e os vídeos da Assembleia Municipal de Matosinhos?"
-- "Posso usar os dados do IPMA numa app paga?"
+- "Qual era a população residente de Coimbra em 2023? Indica a fonte."
+- "Que fornecedores receberam mais da Câmara de Arouca em 2025? Junta-os por NIF."
+- "Compara de forma justa as escolas secundárias de Coimbra."
+- "Quanto deve a Câmara de Braga por habitante, comparada com municípios parecidos?"
+- "O que dizia o site da Câmara de Coimbra sobre o Metro Mondego em 2015?"
+- "Quantas partidas de autocarro tem esta freguesia num dia útil?"
+- "Posso usar dados do IPMA numa app paga?"
 
 ## Rede
 
-As skills não fazem pedidos sozinhas: dizem ao agente onde e como pedir. Se o teu ambiente só deixar sair para domínios autorizados, o catálogo usa:
+As skills não fazem pedidos: dizem ao agente onde e como pedir. Cada skill indica os domínios que usa. Se um domínio estiver bloqueado, o agente tem instruções para parar e dizer qual é, nunca para contornar o bloqueio.
 
-`dados.gov.pt` · `www.ine.pt` · `api.ipma.pt` · `bpstat.bportugal.pt` · `json.geoapi.pt` · `www.parlamento.pt` · `app.parlamento.pt` · `pt.opencouncil.eu` · `ec.europa.eu` · `data-api.ecb.europa.eu` · `api.ted.europa.eu` · `data.europa.eu` · `api.open-meteo.com`
+## Princípios
 
-Se um domínio estiver bloqueado, a skill manda o agente parar e dizer qual é, em vez de tentar contornar o bloqueio.
+- **Só texto.** Cada skill é um `SKILL.md`, às vezes com um ficheiro de referência. Sem scripts para correr, sem dependências, sem chaves.
+- **Licenças à vista.** Cada resposta cita fonte, licença e data de extração.
+- **Honestas sobre o que falta.** O que não foi testado fica marcado "to verify".
+- **Sem dados pessoais.** Listas de pessoas identificadas são agregadas, nunca republicadas para outro fim.
 
-## Segurança e princípios
+## Manter atualizado
 
-- **Só texto.** Cada skill é um único `SKILL.md`. Não instala nada, não corre scripts, não tem dependências.
-- **Zero chaves.** Todas as fontes leem-se sem registo. O agente é instruído a nunca pôr credenciais em URLs ou ficheiros.
-- **Licença sempre à vista.** O agente cita a fonte e a data, e avisa quando uma licença proíbe uso comercial.
-- **Honesto sobre o que não sabe.** O que não foi testado está marcado "to verify" e não deve ir para produção.
-
-## Manter o catálogo atual
-
-- **Verificação semanal:** um [workflow do GitHub Actions](.github/workflows/check-endpoints.yml) chama todos os endpoints às segundas-feiras e publica o resultado. Localmente: `./scripts/check-endpoints.sh`.
-- **Data de verificação:** cada versão diz quando foi verificada. Entradas com mais de 6 meses são reverificadas antes de se confiar nelas.
+- **Verificação semanal:** um [workflow do GitHub Actions](.github/workflows/check-endpoints.yml) chama todos os endpoints às segundas. Localmente: `./scripts/check-endpoints.sh`.
+- **Validação:** `python3 scripts/validate-skills.py` verifica nomes, descrições, tamanhos e links; corre em cada pull request.
+- **Data de verificação:** cada skill tem `metadata.verified`. Volta a verificar o que tiver mais de seis meses antes de confiar.
 
 ## Contribuir
 
-Falta uma fonte? Abre um issue ou um pull request. Uma fonte só entra com: endpoint testado (ou marcado "to verify"), autenticação, licença com link para os termos, limites (ou "not published"), um exemplo de chamada e a data da verificação. Depois de editar um `SKILL.md`, gera os zips com `./scripts/build-zip.sh`.
+Uma fonte só entra com endpoint testado (ou marcado "to verify"), autenticação, licença com link para os termos, limites (ou "não publicados"), um exemplo e a data de verificação. Fontes de um domínio vão para a skill desse domínio; as gerais para `portugal-open-data`. Depois de editar, corre `python3 scripts/validate-skills.py` e `./scripts/build-zip.sh`.
+
+## Estrutura
+
+```
+.claude-plugin/            manifestos do plugin e do marketplace
+skills/<nome>/SKILL.md     uma pasta por skill (algumas com references/)
+dist/*.zip                 as mesmas skills, um zip cada, para o claude.ai
+scripts/                   verificação de endpoints, validador, criação dos zips
+.github/workflows/         verificação semanal e validação dos pull requests
+docs/                      imagens do README
+README.md                  README em inglês
+```
+
+## O que mudou desde `apis-publicas-pt`
+
+A versão 2.0.0 muda o nome do projeto e divide o antigo catálogo numa porta de entrada e em skills de domínio. `apis-publicas-pt` → `portugal-open-data`, `verificar-dados-publicos` → `pt-data-checks`, `reunioes-municipais-pt` → `pt-council-meetings`. Se instalaste os zips antigos, remove-os e instala os novos.
 
 ## Licença
 
 [MIT](LICENSE) © 2026 [Jorge Sousa](https://github.com/jorgesousa)
 
-Este projeto não tem ligação a nenhuma das fontes listadas. Os dados pertencem a cada fonte e seguem os termos de cada uma.
+Sem ligação a nenhuma das fontes. Os dados pertencem a cada fonte e seguem os seus próprios termos.

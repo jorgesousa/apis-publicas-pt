@@ -1,10 +1,10 @@
 ---
-name: verificar-dados-publicos
+name: pt-data-checks
 description: Checklist to run before publishing any number, chart or comparison built from public data (official statistics, public contracts, budgets, council records). Catches mismatched years, wrong units, contracts mistaken for spending, small samples, duplicated entities and licence problems. Use whenever an answer or product cites open data. Verificação de dados públicos antes de responder ou publicar.
 license: MIT
 metadata:
-  version: "1.0.2"
-  verified: "2026-11-02"
+  version: "1.1.0"
+  verified: "2026-11-04"
 ---
 
 # Check public data before you publish it
@@ -25,7 +25,7 @@ Every rule below comes from a real case. The examples use Portuguese data, but t
 - Every number gets an explicit year (or date range). "Latest" is not a year.
 - When combining sources, **compare their years**. If they differ, say so on the chart, not only in a footnote.
 - Check the latest period actually has values: some APIs return an empty latest year (Eurostat `lastTimePeriod=1` returned `value: {}`), and INE marks recent years as "Dado preliminar".
-- Watch which date a dataset uses. Portal BASE files have a "year" field that is the contract year while the portal says dates are publication dates; pick one and state it.
+- Watch which date a dataset uses. In Portal BASE the `Ano` field (and the yearly file) is the **signing** year (`dataCelebracaoContrato`), while publication (`dataPublicacao`) can fall in the next year; pick one date and state it.
 - A year in progress needs a label everywhere ("2026 to 4 Oct"), and must not be compared with a full year without saying so.
 
 > Example: contracts are from 2025, the latest INE population is 2023 → "€/resident = 2025 contracts ÷ 2023 population".
@@ -49,12 +49,14 @@ Every rule below comes from a real case. The examples use Portuguese data, but t
 - One large item can dominate a total: in a small municipality, a single construction project can be a third of a year's contracts. Say so whenever one item is more than ~20% of the total.
 - Small populations make per-capita figures jumpy. Rank small and large places together only with a caveat, or group by size.
 - Show uncertainty or the sample size where it exists (e.g. "observed vs expected" school indicators with few pupils).
+- Say which numbers are **your own calculation** (an average by municipality built from school values, a sum across files) and which are published as such by the source.
 
 ### 6. Entities and duplicates
 - The same supplier, school or body appears under different names → match on an identifier (tax number NIF/NIPC, DGEEC school code, INE geography code), not on the name.
 - Check for duplicates across files (yearly files that overlap, the same contract amended later).
 - Classification codes can be unreliable (CPV codes in contracts): use them as a signal, verify, and report the share still "under review".
-- Never publish personal data of private individuals. Mask personal tax numbers; councillors and officials acting in public roles are fine.
+- Count entities by identifier, not by rows: a list of professionals can repeat the same person once per address (one 2026 dataset had 4 754 rows for 3 865 licence numbers).
+- Never publish personal data of private individuals. Mask personal tax numbers; councillors and officials acting in public roles are fine. An open licence on a list of named people (professionals, suppliers who are individuals) does not make it free to reuse for a new purpose such as marketing: aggregate it instead.
 
 ### 7. Fair comparison
 - Compare like with like: same period, same definition, same unit, similar size or context.
