@@ -1,0 +1,33 @@
+name: Broken or wrong
+description: A source stopped answering, moved, changed format — or a number means something other than what the skill says.
+title: "[source] "
+labels: ["source", "bug"]
+body:
+  - type: input
+    id: skill
+    attributes:
+      label: Skill
+      placeholder: pt-public-procurement
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source and URL
+      placeholder: Portal BASE contracts 2026, https://dados.gov.pt/...
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What you saw
+      description: The call you made, what came back, and why it is wrong or surprising. Numbers, field names and dates help most.
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: Date you checked
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true

@@ -1,0 +1,31 @@
+name: New skill
+description: Propose a new domain skill (elections, housing, tourism, energy…).
+title: "[new skill] pt-"
+labels: ["new skill"]
+body:
+  - type: input
+    id: domain
+    attributes:
+      label: Domain
+      placeholder: pt-housing
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Main sources
+      description: Where the data is, format and licence, as far as you know.
+    validations:
+      required: true
+  - type: textarea
+    id: questions
+    attributes:
+      label: Questions people ask
+  - type: dropdown
+    id: help
+    attributes:
+      label: Would you like to write it?
+      options:
+        - "Yes"
+        - "With help"
+        - "No, just the idea"
